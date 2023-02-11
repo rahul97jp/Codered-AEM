@@ -1,0 +1,37 @@
+<html>
+<head>
+	<sly data-sly-use.clientlib="/Frontend/clientlib"
+		 data-sly-call="${clientlib.all @ categories='clientlib'}" />
+</head>
+
+<body>
+	<div class="aem-practice">
+		<h2 class="title">${properties.title}</h2>
+		<sly data-sly-test="${properties.backgroundImage && !wcmmode.edit}">
+			<div class="image" style="background-image: url('${properties.imagePath}')"></div>
+		</sly>
+
+		<ul class="navigation-items">
+			<li class="navigation-item"
+				data-sly-list="${properties.navigationItems}"
+				data-sly-test="${itemList.index == 0}">
+			   <b><a href="${item.path}">${item.title}</a></b>
+			</li>
+			<li class="navigation-item"
+				data-sly-list="${properties.navigationItems}"
+				data-sly-test="${!itemList.index}">
+			  <a href="${item.path}">${item.title}</a>
+			</li>
+			<li class="navigation-item"
+				data-sly-list="${properties.navigationItems}"
+				data-sly-test="${itemList.index == itemList.size - 1}">
+			  <i><a href="${item.path}">${item.title}</a></i>
+			</li>
+		</ul>
+
+		<sly data-sly-test="${wcmmode.edit}">
+			<div class="mode-indicator">Author mode</div>
+		</sly>
+	</div>
+</body>
+</html>
